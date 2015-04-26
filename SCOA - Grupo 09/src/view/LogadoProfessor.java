@@ -2,22 +2,17 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTable;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.awt.CardLayout;
 
 public class LogadoProfessor extends Logado {
 
@@ -34,8 +29,6 @@ public class LogadoProfessor extends Logado {
     	Color headerFundo = new Color(185, 207, 194);
     	
 
-    	
-    	
     	lblBemVindo = new JLabel("Bem vindo!");
     	JLabel lblAreaDoFuncionario = new JLabel("<html><div style='font-size: 16px; border-bottom: 2px solid black; padding: 0 2px; margin-bottom: 10px;'>Área do professor</div></html>");
     	btnLogout = new JButton("Logout");
@@ -63,24 +56,22 @@ public class LogadoProfessor extends Logado {
     	header.add(headerTopo, BorderLayout.NORTH);
     	header.add(lblBemVindo, BorderLayout.SOUTH);
     	
-
-    	
-    	
     	
     	
     	add(header, BorderLayout.NORTH);
-    	
     	
     	UIManager.put("TabbedPane.borderColor", Color.RED);
     	
     	Border borda = BorderFactory.createEmptyBorder();
     	tabbedPane = new JTabbedPane(JTabbedPane.TOP);
     	tabbedPane.setUI(new AquaBarTabbedPaneUI());
-
-    	JPanel aba2 = new ListarFuncionarios();
-    	tabbedPane.addTab("Listagens", aba2);    	
+    	
+    	
+    	tabbedPane.addTab("Início", new ProfessorInicio());
+    	tabbedPane.addTab("Consultas", new ProfessorConsultas());    	
     	
     	add(tabbedPane);
+
     }
     
     public JTabbedPane getTabbedPane() {
@@ -88,7 +79,7 @@ public class LogadoProfessor extends Logado {
     }
     
     public void setNome(String nome) {
-    	lblBemVindo.setText("Bem vindo(a), " + nome + "! Aqui você sempre ouve a hora certa e ainda conhece os feriados do ano!");
+    	lblBemVindo.setText("Logado como " + nome);
     }
     
     public JButton getBotaoLogout() {

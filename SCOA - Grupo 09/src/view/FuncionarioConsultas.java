@@ -1,14 +1,10 @@
 package view;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
 public class FuncionarioConsultas extends JPanel {

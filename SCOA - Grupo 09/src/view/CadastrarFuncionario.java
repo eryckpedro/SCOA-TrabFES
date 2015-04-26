@@ -1,22 +1,15 @@
 package view;
 
-import javax.swing.JPanel;
-
-import java.awt.FlowLayout;
-
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.JSeparator;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javax.swing.JButton;
-import javax.swing.border.EmptyBorder;
 import javax.swing.SwingConstants;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class CadastrarFuncionario extends Cadastrar {
 	private JTextField txtNome;

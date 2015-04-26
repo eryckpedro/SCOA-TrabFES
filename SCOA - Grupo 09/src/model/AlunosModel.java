@@ -1,15 +1,14 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dados.Aluno;
-
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+import dados.Aluno;
 
 public class AlunosModel {
 	
@@ -22,8 +21,6 @@ public class AlunosModel {
 
     public ArrayList<Aluno> lista() {
     	try {
-    		//Class.forName("com.mysql.jdbc.Driver");
-
     		Connection con = dataSource.getConnection();
     		Statement st = con.createStatement();
     		ResultSet rs = st.executeQuery("SELECT * FROM " + nomeTabela);
@@ -51,7 +48,7 @@ public class AlunosModel {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return null;
@@ -74,7 +71,7 @@ public class AlunosModel {
 	        
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
     }
     

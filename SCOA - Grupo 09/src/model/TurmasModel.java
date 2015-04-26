@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -9,13 +8,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
-import dados.Aluno;
-import dados.Disciplina;
-import dados.Professor;
-import dados.Sala;
-import dados.Turma;
-
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+import dados.Turma;
 
 public class TurmasModel {
 	
@@ -28,8 +23,6 @@ public class TurmasModel {
 
     public ArrayList<Turma> lista() {
     	try {
-    		//Class.forName("com.mysql.jdbc.Driver");
-
     		Connection con = dataSource.getConnection();
     		Statement st = con.createStatement();
     		ResultSet rs = st.executeQuery("SELECT * FROM " + nomeTabela);
@@ -57,7 +50,7 @@ public class TurmasModel {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return null;
@@ -82,7 +75,7 @@ public class TurmasModel {
 	        
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
     }
     

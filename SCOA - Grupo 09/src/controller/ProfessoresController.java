@@ -17,21 +17,23 @@ import view.FuncionarioConsultas;
 import view.ListarFuncionarios;
 import view.LogadoAluno;
 import view.LogadoFuncionario;
+import view.LogadoProfessor;
+import view.ProfessorConsultas;
 import view.View;
 import dados.Aluno;
 
-public class AlunosController {
+public class ProfessoresController {
 	
 	ListaController listaController;
     private Model model;
     private View view;
     private JTabbedPane tabbedPane;
     
-	public AlunosController(Model model, View view){
+	public ProfessoresController(Model model, View view){
         this.model = model;
         this.view = view;
     	
-        LogadoAluno l = (LogadoAluno) view.getPanel();
+        LogadoProfessor l = (LogadoProfessor) view.getPanel();
     	
         this.tabbedPane = l.getTabbedPane();
         this.listaController = new ListaController(model, view);
@@ -39,7 +41,7 @@ public class AlunosController {
 
 	public void init() {
 		
-		AlunoConsultas abaConsultas = (AlunoConsultas) getAba(tabbedPane, "Consultas");
+		ProfessorConsultas abaConsultas = (ProfessorConsultas) getAba(tabbedPane, "Consultas");
     	JTabbedPane consultasTabbedPane = abaConsultas.getTabbedPane();
     	
     	

@@ -1,29 +1,13 @@
 package view;
 
-import javax.swing.JPanel;
-
-import java.awt.FlowLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.RowSpec;
-
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
 
-import java.awt.GridLayout;
-
-import javax.swing.BoxLayout;
-
-import java.awt.CardLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class CadastrarDisciplina extends Cadastrar {
 	private JTextField txtNome;

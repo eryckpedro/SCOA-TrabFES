@@ -1,38 +1,22 @@
 package view;
 
-import javax.swing.JPanel;
-
-import java.awt.FlowLayout;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JSpinner;
-import javax.swing.JSpinner.DateEditor;
-import javax.swing.JTextField;
-import javax.swing.JSeparator;
-import javax.swing.SpinnerDateModel;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.factories.FormFactory;
-import com.jgoodies.forms.layout.RowSpec;
-
-import javax.swing.JButton;
-
-import java.awt.GridLayout;
-
-import javax.swing.BoxLayout;
-
-import java.awt.CardLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.JSpinner.DateEditor;
+import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+
+import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class CadastrarTurma extends Cadastrar {
 	private JTextField txtMatricula;

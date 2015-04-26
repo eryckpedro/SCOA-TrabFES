@@ -1,17 +1,13 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
-import dados.Aluno;
 import dados.Funcionario;
 
 public class FuncionariosModel {
@@ -25,8 +21,6 @@ public class FuncionariosModel {
     
     public ArrayList<Funcionario> lista() {
     	try {
-    		//Class.forName("com.mysql.jdbc.Driver");
-
     		Connection con = dataSource.getConnection();
     		Statement st = con.createStatement();
     		ResultSet rs = st.executeQuery("SELECT * FROM " + nomeTabela);
@@ -53,7 +47,7 @@ public class FuncionariosModel {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return null;
@@ -76,7 +70,7 @@ public class FuncionariosModel {
 	        
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
     }
     
@@ -97,7 +91,7 @@ public class FuncionariosModel {
     		con.close();
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;

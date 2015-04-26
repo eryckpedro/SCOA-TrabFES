@@ -3,37 +3,25 @@ package controller;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
 
-import dados.Funcionario;
-import model.FuncionariosModel;
 import model.Model;
 import view.Cadastrar;
-import view.CadastrarFuncionario;
 import view.CadastrarTurma;
 import view.FuncionarioCadastros;
 import view.FuncionarioConsultas;
 import view.Listar;
 import view.LogadoFuncionario;
-import view.Login;
-import view.ListarFuncionarios;
 import view.View;
 
 public class FuncionariosController {
 	
-    private FuncionariosModel funcionariosModel;
     CadastroController cadastroController;
     ListaController listaController;
     private Model model;
@@ -46,7 +34,7 @@ public class FuncionariosController {
         this.view = view;
         this.idFuncLogado = id;
         
-        this.funcionariosModel = model.getFuncionariosModel();
+        model.getFuncionariosModel();
         this.cadastroController = new CadastroController(model, view);
         this.listaController = new ListaController(model, view);
         
@@ -77,11 +65,7 @@ public class FuncionariosController {
 		return null;
 	}
 	
-	
 	public void init() {
-		
-		LogadoFuncionario panel = (LogadoFuncionario) view.getPanel();
-
 		
 		FuncionarioCadastros abaCadastros = (FuncionarioCadastros) getAba(tabbedPane, "Cadastros");
     	JTabbedPane cadastrosTabbedPane = abaCadastros.getTabbedPane();
@@ -135,7 +119,7 @@ public class FuncionariosController {
     	cadastrosTabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
             	int abaNum = cadastrosTabbedPane.getSelectedIndex();
-            	String aba = consultasTabbedPane.getTitleAt(abaNum);
+            	String aba = cadastrosTabbedPane.getTitleAt(abaNum);
             	
             	Cadastrar c = (Cadastrar)cadastrosTabbedPane.getComponent(abaNum);
             	c.getRootPane().setDefaultButton(c.getBotao());
@@ -160,17 +144,7 @@ public class FuncionariosController {
     	
     	consultasTabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-            	int abaNum = consultasTabbedPane.getSelectedIndex();
-            	String aba = consultasTabbedPane.getTitleAt(abaNum);
-            	
-            	Listar l = (Listar) consultasTabbedPane.getComponent(abaNum);
-            	
-            	if(aba.equals("Funcionário"))     listaController.listaFuncionarios(l);
-            	else if(aba.equals("Aluno"))      listaController.listaAlunos(l);
-            	else if(aba.equals("Professor"))  listaController.listaProfessores(l);
-            	else if(aba.equals("Disciplina")) listaController.listaDisciplinas(l);
-            	else if(aba.equals("Sala"))       listaController.listaSalas(l);
-            	else if(aba.equals("Turma"))      listaController.listaTurmas(l);
+            	listaController.autualizaListaConsultas(consultasTabbedPane);
             }
         });
     	
@@ -179,16 +153,19 @@ public class FuncionariosController {
     	
 		
     	// ao mudar a aba de cima (Inicio | Cadastros | Consultas)
-    	// TODO verificar em qual subaba tá, quando mudar de aba aqui, e atualizar de acordo (porque não tá sempre na primeira, fica na última que tava)
+    	// e verificar em qual subaba tá, quando mudar de aba aqui, e atualizar de acordo
+    	// (porque não tá sempre na primeira, fica na última que tava)
     	tabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
             	int abaNum = tabbedPane.getSelectedIndex();
             	String aba = tabbedPane.getTitleAt(abaNum);
                 
             	if(aba.equals("Cadastros")) {
-            		// primeiro botão padrão é o da primeira aba
-            		// TODO tem que ver a aba que tá, não é sempre a primeira! (caso: Inicio -> Consultas -> Cadastro)
-                	Cadastrar c = (Cadastrar) cadastrosTabbedPane.getComponent(0);
+            		int abaCadastros = cadastrosTabbedPane.getSelectedIndex();
+            		
+            		// botão padrão é o da aba selecionada
+            		// (vendo a aba que tá, não é sempre a primeira! (caso: Inicio -> Consultas -> Cadastro))
+                	Cadastrar c = (Cadastrar) cadastrosTabbedPane.getComponent(abaCadastros);
                 	c.getRootPane().setDefaultButton(c.getBotao());
                 	return;
             	}
@@ -199,10 +176,8 @@ public class FuncionariosController {
             	
             	
             	if(aba.equals("Consultas")) {
-            		// primeira lista é a de funcionários (primeira aba)
-            		// TODO tem que ver a aba que tá, não é sempre a primeira! (caso: Inicio -> Cadastro -> Consultas)
-	            	Listar l = (Listar) consultasTabbedPane.getComponent(0);
-	            	listaController.listaFuncionarios(l);
+            		// atualizar lista da aba selecionada
+            		listaController.autualizaListaConsultas(consultasTabbedPane);
             	}
             }
         });

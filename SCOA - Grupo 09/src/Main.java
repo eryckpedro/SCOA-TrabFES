@@ -1,12 +1,8 @@
-import java.awt.Font;
-
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-import model.*;
-import view.*;
-import controller.*;
+import model.Model;
+import view.View;
+import controller.Controller;
 
 public class Main {
 

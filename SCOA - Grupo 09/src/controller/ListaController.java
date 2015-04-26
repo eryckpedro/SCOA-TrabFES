@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.Component;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,14 +7,9 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 
-import dados.Aluno;
-import dados.Disciplina;
-import dados.Funcionario;
-import dados.Professor;
-import dados.Sala;
-import dados.Turma;
 import model.AlunosModel;
 import model.DisciplinasModel;
 import model.FuncionariosModel;
@@ -24,15 +17,15 @@ import model.Model;
 import model.ProfessoresModel;
 import model.SalasModel;
 import model.TurmasModel;
-import view.Cadastrar;
-import view.CadastrarAluno;
-import view.CadastrarDisciplina;
-import view.CadastrarFuncionario;
-import view.CadastrarProfessor;
-import view.CadastrarSala;
 import view.CadastrarTurma;
 import view.Listar;
 import view.View;
+import dados.Aluno;
+import dados.Disciplina;
+import dados.Funcionario;
+import dados.Professor;
+import dados.Sala;
+import dados.Turma;
 
 public class ListaController {
 	
@@ -63,6 +56,20 @@ public class ListaController {
 	public void limpaTabela(DefaultTableModel tabela) {
 		while(tabela.getRowCount() > 0)
 			tabela.removeRow(0);
+	}
+	
+	public void autualizaListaConsultas(JTabbedPane consultasTabbedPane) {
+    	int abaNum = consultasTabbedPane.getSelectedIndex();
+    	String aba = consultasTabbedPane.getTitleAt(abaNum);
+    	
+    	Listar l = (Listar) consultasTabbedPane.getComponent(abaNum);
+    	
+    	if(aba.equals("Funcionário"))     listaFuncionarios(l);
+    	else if(aba.equals("Aluno"))      listaAlunos(l);
+    	else if(aba.equals("Professor"))  listaProfessores(l);
+    	else if(aba.equals("Disciplina")) listaDisciplinas(l);
+    	else if(aba.equals("Sala"))       listaSalas(l);
+    	else if(aba.equals("Turma"))      listaTurmas(l);
 	}
 	
 	
@@ -196,4 +203,5 @@ public class ListaController {
 	public void alert(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
 	}
+
 }

@@ -1,15 +1,10 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashMap;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -90,7 +85,7 @@ public class Model {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;
@@ -119,7 +114,7 @@ public class Model {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;
@@ -146,7 +141,7 @@ public class Model {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;
@@ -175,7 +170,7 @@ public class Model {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;
@@ -204,7 +199,7 @@ public class Model {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;
@@ -238,7 +233,7 @@ public class Model {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return r;
@@ -262,7 +257,7 @@ public class Model {
     		con.close();
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return nome;
@@ -289,7 +284,7 @@ public class Model {
     		con.close();
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return nome;
@@ -314,7 +309,7 @@ public class Model {
     		con.close();
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return nome;
@@ -339,7 +334,7 @@ public class Model {
     		con.close();
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return nome;
@@ -357,14 +352,14 @@ public class Model {
     		ResultSet rs = pst.executeQuery();
     		
 	        if(rs.next())
-	        	id = rs.getInt("idFuncionario");
+	        	id = rs.getInt("idFuncCad");
 	        
     		rs.close();
     		pst.close();
     		con.close();
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return id;

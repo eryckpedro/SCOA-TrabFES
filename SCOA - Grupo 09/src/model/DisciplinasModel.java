@@ -1,17 +1,14 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import dados.Aluno;
-import dados.Disciplina;
-import dados.Professor;
-
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+import dados.Disciplina;
 
 public class DisciplinasModel {
 	
@@ -51,7 +48,7 @@ public class DisciplinasModel {
         
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
         
     	return null;
@@ -71,7 +68,7 @@ public class DisciplinasModel {
 	        
     	}
     	catch(Exception e) {
-    		System.out.println(e);
+    		e.printStackTrace();
     	}
     }
     

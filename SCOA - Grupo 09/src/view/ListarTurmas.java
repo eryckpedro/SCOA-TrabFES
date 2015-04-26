@@ -1,26 +1,11 @@
 package view;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
-import javax.swing.JTextPane;
-import javax.swing.BoxLayout;
-
 import java.awt.BorderLayout;
 
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-
-import java.awt.FlowLayout;
-
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JScrollPane;
 
 public class ListarTurmas extends Listar {
 

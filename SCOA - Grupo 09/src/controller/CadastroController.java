@@ -12,7 +12,6 @@ import model.Model;
 import model.ProfessoresModel;
 import model.SalasModel;
 import model.TurmasModel;
-import view.Cadastrar;
 import view.CadastrarAluno;
 import view.CadastrarDisciplina;
 import view.CadastrarFuncionario;

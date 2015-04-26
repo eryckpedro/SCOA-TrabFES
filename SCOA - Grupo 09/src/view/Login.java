@@ -1,22 +1,19 @@
 package view;
 
-import javax.swing.JPanel;
-
-import java.awt.Dimension;
-import java.awt.GridLayout;
-
-import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JRadioButton;
-import javax.swing.Box;
-
-import java.awt.Panel;
 import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Panel;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 public class Login extends JPanel {
 	private JTextField txtLogin;

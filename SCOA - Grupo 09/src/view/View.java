@@ -1,17 +1,12 @@
 package view;
 
-import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.UIManager;
 
 public class View extends JFrame {
 

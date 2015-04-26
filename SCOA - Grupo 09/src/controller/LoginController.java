@@ -1,13 +1,17 @@
 package controller;
 
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JOptionPane;
 
-import model.*;
-import view.*;
+import model.Model;
+import view.Logado;
+import view.LogadoAluno;
+import view.LogadoFuncionario;
+import view.LogadoProfessor;
+import view.Login;
+import view.View;
 
 public class LoginController {
 	
@@ -75,6 +79,10 @@ public class LoginController {
 				
 				// mudar pra página de aluno logado
 				mudaPagina(new LogadoAluno(), login, "Aluno");
+				
+				// cria e inicia o controller dos alunos
+				AlunosController f = new AlunosController(model, view);
+				f.init();
 			}
 		}
 		
@@ -85,6 +93,10 @@ public class LoginController {
 				
 				// mudar pra página de aluno logado
 				mudaPagina(new LogadoProfessor(), login, "Professor");
+				
+				// cria e inicia o controller dos professores
+				ProfessoresController f = new ProfessoresController(model, view);
+				f.init();
 			}
 		}
 		
@@ -97,7 +109,7 @@ public class LoginController {
 				// mudar pra página de aluno logado
 				mudaPagina(new LogadoFuncionario(), login, "Funcionario");
 								
-				// inicia o controller dos funcionários
+				// cria e inicia o controller dos funcionários
 				FuncionariosController f = new FuncionariosController(model, view, id);
 				f.init();
 			}
