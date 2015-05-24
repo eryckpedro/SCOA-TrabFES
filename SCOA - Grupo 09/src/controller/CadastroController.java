@@ -78,6 +78,31 @@ public class CadastroController {
     		return;
     	}
     	
+    	if(nome.length() <= 3) {
+    		alert("O nome  deve ter mais de 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(setor.length() <= 3) {
+    		alert("O setor  deve ter mais de 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(login.length() <= 5) {
+    		alert("O login  deve ter mais de 5 caracteres!");
+    		return;
+    	}
+    	
+    	if(senha.length() <= 5) {
+    		alert("A senha  deve ter mais de 5 caracteres!");
+    		return;
+    	}
+    	
+    	if(!nome.matches("[A-Z]+")) {
+    		alert("O nome deve conter apenas letras.");
+    		return;
+    	}
+    	
     	if(model.existeLogin(login, "Funcionario")) {
     		alert("O login escolhido já existe!");
     		return;
@@ -88,6 +113,9 @@ public class CadastroController {
     		return;
     	}
     		
+    	
+    	
+    	
     		
     	
     	funcionariosModel.adiciona(nome, setor, login, senha, idFuncCad);
@@ -107,7 +135,7 @@ public class CadastroController {
     	String login = cad.getLogin();
     	String senha = cad.getSenha();
     	
-    	if(nome.isEmpty() || senha.isEmpty() || login.isEmpty() || senha.isEmpty()) {
+    	if(nome.isEmpty() || matricula.isEmpty() || login.isEmpty() || senha.isEmpty()) {
     		alert("Por favor, preencha todos os campos.");
     		return;
     	}
@@ -132,6 +160,31 @@ public class CadastroController {
     		return;
     	}
     	
+     	if(nome.length() <= 3) {
+    		alert("O nome  deve ter mais de 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(matricula.length() <= 3) {
+    		alert("A matricula  deve ter mais de 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(login.length() <= 5) {
+    		alert("O login  deve ter mais de 5 caracteres!");
+    		return;
+    	}
+    	
+    	if(senha.length() <= 5) {
+    		alert("A senha  deve ter mais de 5 caracteres!");
+    		return;
+    	}
+    	
+    	if(!nome.matches("[A-Z]+")) {
+    		alert("O nome deve conter apenas letras.");
+    		return;
+    	}
+    	
     	
     	if(model.existeLogin(login, "Aluno")) {
     		alert("O login escolhido já existe!");
@@ -143,7 +196,7 @@ public class CadastroController {
     		return;
     	}
     	
-    	if(model.existeMatricula(nome, "Aluno")) {
+    	if(model.existeMatricula(matricula, "Aluno")) {
     		alert("Já existe um aluno cadastrado com essa matrícula!");
     		return;
     	}
@@ -190,6 +243,32 @@ public class CadastroController {
     		return;
     	}
     	
+    	
+     	if(nome.length() <= 3) {
+    		alert("O nome  deve ter mais de 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(matricula.length() <= 3) {
+    		alert("A matricula  deve ter mais de 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(login.length() <= 5) {
+    		alert("O login  deve ter mais de 5 caracteres!");
+    		return;
+    	}
+    	
+    	if(senha.length() <= 5) {
+    		alert("A senha  deve ter mais de 5 caracteres!");
+    		return;
+    	}
+    	
+    	if(!nome.matches("[A-Z]+")) {
+    		alert("O nome deve conter apenas letras.");
+    		return;
+    	}
+    	
     	if(model.existeLogin(login, "Professor")) {
     		alert("O login escolhido já existe!");
     		return;
@@ -200,7 +279,7 @@ public class CadastroController {
     		return;
     	}
     	
-    	if(model.existeMatricula(nome, "Professor")) {
+    	if(model.existeMatricula(matricula, "Professor")) {
     		alert("Já existe um professor cadastrado com essa matrícula!");
     		return;
     	}
@@ -226,6 +305,15 @@ public class CadastroController {
     	if(nome.length() > 45) {
     		alert("A disciplina não deve ter mais que 45 caracteres!");
     		return;
+    	}
+    	
+    	if(nome.length() <= 3) {
+    		alert("A disciplina deve ter mais que 3 caracteres!");
+    		return;
+    	}
+    	
+    	if(!nome.matches("[A-Z]+")){
+    		alert("O nome deve conter apenas letras");
     	}
     	
     	if(model.existeNome(nome, "Disciplina")) {
