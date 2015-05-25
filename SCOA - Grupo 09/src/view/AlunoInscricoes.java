@@ -7,12 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.border.EmptyBorder;
 
-public class AlunoConsultas extends JPanel {
+public class AlunoInscricoes extends JPanel {
 
 	
 	JTabbedPane tabbedPane;
 	
-	public AlunoConsultas() {
+	public AlunoInscricoes() {
 		
 		
 		setLayout(new BorderLayout(0, 0));
@@ -26,11 +26,8 @@ public class AlunoConsultas extends JPanel {
 		add(tabbedPane);
 		
 		
-		JPanel panel3 = new ListarInscricaoTurma();
-		tabbedPane.addTab("Turmas inscritas", panel3);
-		
-		JPanel panel4 = new ListarDiscConcluidas();
-		tabbedPane.addTab("Disciplinas concluídas", panel4);
+		JPanel panel3 = new InscricaoTurma();
+		tabbedPane.addTab("Turmas", panel3);
 
 	}
 	

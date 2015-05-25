@@ -20,6 +20,9 @@ public class Controller {
         
         // logar automaticamente no admin, para testes mais rápidos
         //loginController.testeRapido();
+        
+        // logar automaticamente no aluno
+        loginController.testeRapidoAluno();
     }
     
     

@@ -123,4 +123,11 @@ public class Login extends JPanel {
 		txtSenha.setText("senha");
 		rdbtnFuncionario.setSelected(true);
 	}
+	
+	// TODO remover
+	public void testeRapidoAluno() {
+		txtLogin.setText("aluno1");
+		txtSenha.setText("aluno1");
+		rdbtnAluno.setSelected(true);
+	}
 }

@@ -1,8 +1,10 @@
 package controller;
 
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 import model.AlunosModel;
@@ -18,6 +20,7 @@ import view.CadastrarFuncionario;
 import view.CadastrarProfessor;
 import view.CadastrarSala;
 import view.CadastrarTurma;
+import view.InscricaoTurma;
 import view.View;
 
 public class CadastroController {
@@ -79,26 +82,26 @@ public class CadastroController {
     	}
     	
     	if(nome.length() <= 3) {
-    		alert("O nome  deve ter mais de 3 caracteres!");
+    		alert("O nome deve ter mais de 3 caracteres!");
     		return;
     	}
     	
     	if(setor.length() <= 3) {
-    		alert("O setor  deve ter mais de 3 caracteres!");
+    		alert("O setor deve ter mais de 3 caracteres!");
     		return;
     	}
     	
     	if(login.length() <= 5) {
-    		alert("O login  deve ter mais de 5 caracteres!");
+    		alert("O login deve ter mais de 5 caracteres!");
     		return;
     	}
     	
     	if(senha.length() <= 5) {
-    		alert("A senha  deve ter mais de 5 caracteres!");
+    		alert("A senha deve ter mais de 5 caracteres!");
     		return;
     	}
     	
-    	if(!nome.matches("[A-Z]+")) {
+    	if(!nome.matches("[^0-9]+")) {
     		alert("O nome deve conter apenas letras.");
     		return;
     	}
@@ -161,30 +164,29 @@ public class CadastroController {
     	}
     	
      	if(nome.length() <= 3) {
-    		alert("O nome  deve ter mais de 3 caracteres!");
+    		alert("O nome deve ter mais de 3 caracteres!");
     		return;
     	}
     	
     	if(matricula.length() <= 3) {
-    		alert("A matricula  deve ter mais de 3 caracteres!");
+    		alert("A matricula deve ter mais de 3 caracteres!");
     		return;
     	}
     	
     	if(login.length() <= 5) {
-    		alert("O login  deve ter mais de 5 caracteres!");
+    		alert("O login deve ter mais de 5 caracteres!");
     		return;
     	}
     	
     	if(senha.length() <= 5) {
-    		alert("A senha  deve ter mais de 5 caracteres!");
+    		alert("A senha deve ter mais de 5 caracteres!");
     		return;
     	}
     	
-    	if(!nome.matches("[A-Z]+")) {
+    	if(!nome.matches("[^0-9]+")) {
     		alert("O nome deve conter apenas letras.");
     		return;
     	}
-    	
     	
     	if(model.existeLogin(login, "Aluno")) {
     		alert("O login escolhido já existe!");
@@ -245,26 +247,26 @@ public class CadastroController {
     	
     	
      	if(nome.length() <= 3) {
-    		alert("O nome  deve ter mais de 3 caracteres!");
+    		alert("O nome deve ter mais de 3 caracteres!");
     		return;
     	}
     	
     	if(matricula.length() <= 3) {
-    		alert("A matricula  deve ter mais de 3 caracteres!");
+    		alert("A matricula deve ter mais de 3 caracteres!");
     		return;
     	}
     	
     	if(login.length() <= 5) {
-    		alert("O login  deve ter mais de 5 caracteres!");
+    		alert("O login deve ter mais de 5 caracteres!");
     		return;
     	}
     	
     	if(senha.length() <= 5) {
-    		alert("A senha  deve ter mais de 5 caracteres!");
+    		alert("A senha deve ter mais de 5 caracteres!");
     		return;
     	}
     	
-    	if(!nome.matches("[A-Z]+")) {
+    	if(!nome.matches("[^0-9]+")) {
     		alert("O nome deve conter apenas letras.");
     		return;
     	}
@@ -295,6 +297,17 @@ public class CadastroController {
     	
 		CadastrarDisciplina cad = (CadastrarDisciplina) c;
 		
+		
+		int prereqs = cad.getCheckBoxList().getModel().getSize();
+		
+		ArrayList<Integer> idDisciplinas = new ArrayList<>();
+
+		for(int i = 0; i < prereqs; i++) {
+			JCheckBox checkbox = (JCheckBox) cad.getCheckBoxList().getModel().getElementAt(i);
+			if(checkbox.isSelected())
+				idDisciplinas.add(cad.getIdDisciplina(i));
+		}
+		
     	String nome = cad.getNome();
     	
     	if(nome.isEmpty()) {
@@ -312,16 +325,13 @@ public class CadastroController {
     		return;
     	}
     	
-    	if(!nome.matches("[A-Z]+")){
-    		alert("O nome deve conter apenas letras");
-    	}
     	
     	if(model.existeNome(nome, "Disciplina")) {
     		alert("Já existe uma disciplina com o nome digitado!");
     		return;
     	}
     	
-    	disciplinasModel.adiciona(nome, idFuncCad);
+    	disciplinasModel.adiciona(nome, idFuncCad, idDisciplinas);
     	
     	cad.limpaCampos();
     	
@@ -403,7 +413,7 @@ public class CadastroController {
     }
 	
 	
-public void adicionaTurma(Component c, int idFuncCad){
+	public void adicionaTurma(Component c, int idFuncCad){
     	
 		CadastrarTurma cad = (CadastrarTurma) c;
 		
@@ -448,5 +458,38 @@ public void adicionaTurma(Component c, int idFuncCad){
 	
 	public void alert(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
+	}
+
+	public void adicionaInscricaoEmTurma(InscricaoTurma c, int idAlunoLogado) {
+		int linhaSelecionada = c.getTabela().getSelectedRow();
+		int idTurma = c.getIdTurma(linhaSelecionada);
+		
+		int idDisciplina = model.getDisciplinaFromTurma(idTurma);
+		ArrayList<Integer> preRequisitos = disciplinasModel.listaPreRequisitos(idDisciplina);
+		
+		String erros = "";
+		boolean errado = false;
+		
+		// verifica se concluiu todos os pré-requisitos
+		for(Integer prereq : preRequisitos) {
+			if(!alunosModel.concluiuDisciplina(idAlunoLogado, idDisciplina)) {
+				errado = true;
+				erros += "\nVocê ainda não concluiu \"" + model.getNomeById(prereq, "Disciplina") + "\".";
+			}
+		}
+		
+		if(errado) {
+			alert("Para se inscrever nessa matéria é necessário concluir todos os pré-requisitos!" + erros);
+			return;
+		}
+		
+		if(model.existeInscricao(idAlunoLogado, idTurma)) {
+			alert("Você já está inscrito nessa turma!");
+			return;
+		}
+		
+		alunosModel.adicionaInscricaoEmTurma(idAlunoLogado, idTurma);
+		
+		alert("Parabéns! Você se inscreveu em \"" + model.getNomeById(idDisciplina, "Disciplina") + "\".");
 	}
 }

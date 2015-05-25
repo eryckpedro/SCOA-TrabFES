@@ -81,7 +81,7 @@ public class LoginController {
 				mudaPagina(new LogadoAluno(), login, "Aluno");
 				
 				// cria e inicia o controller dos alunos
-				AlunosController f = new AlunosController(model, view);
+				AlunosController f = new AlunosController(model, view, id);
 				f.init();
 			}
 		}
@@ -89,7 +89,7 @@ public class LoginController {
 		else if(tipo == LOGIN_PROFESSOR) {
 			if(model.loginValido(login, senha, "Professor")) {
 				logado = true;
-				tipoLogin = LOGIN_ALUNO;
+				tipoLogin = LOGIN_PROFESSOR;
 				
 				// mudar pra página de aluno logado
 				mudaPagina(new LogadoProfessor(), login, "Professor");
@@ -172,6 +172,14 @@ public class LoginController {
 		
 		Login l = (Login) view.getPanel();
 		l.testeRapido();
+		login();
+	}
+	
+	// TODO remover
+	public void testeRapidoAluno() {
+		
+		Login l = (Login) view.getPanel();
+		l.testeRapidoAluno();
 		login();
 	}
 	

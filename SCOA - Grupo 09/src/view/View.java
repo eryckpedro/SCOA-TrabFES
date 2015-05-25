@@ -24,6 +24,7 @@ public class View extends JFrame {
 
     	add(this.panel);
 		setSize(640,480);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
     }

@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
@@ -74,5 +76,53 @@ public class AlunosModel {
     		e.printStackTrace();
     	}
     }
+    
+    public void adicionaInscricaoEmTurma(int idAluno, int idTurma) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("INSERT INTO Aluno_frequenta_Turma(idAluno, idTurma) VALUES (?, ?)");
+            
+            pst.setInt(1, idAluno);
+            pst.setInt(2, idTurma);
+            pst.execute();
+	        
+	        pst.close();
+	        con.close();
+	        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+    
+    
+    public boolean concluiuDisciplina(int idAluno, int idDisciplina) {
+    	
+    	boolean r = false;
+    	
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("SELECT * FROM Aluno_conclui_Disciplina WHERE idAluno = ? AND idDisciplina = ? AND media >= 5");
+    		
+    		pst.setInt(1, idAluno);
+    		pst.setInt(2, idDisciplina);
+    		
+    		ResultSet rs = pst.executeQuery();
+    		
+    		if(rs.next())
+    			r = true;
+    		
+    		rs.close();
+    		pst.close();
+    		con.close();
+        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+        
+    	return r;
+    }
+    
     
 }

@@ -13,7 +13,9 @@ import javax.swing.event.ChangeListener;
 
 import model.Model;
 import view.Cadastrar;
+import view.CadastrarDisciplina;
 import view.CadastrarTurma;
+import view.CheckBoxList;
 import view.FuncionarioCadastros;
 import view.FuncionarioConsultas;
 import view.Listar;
@@ -123,6 +125,16 @@ public class FuncionariosController {
             	
             	Cadastrar c = (Cadastrar)cadastrosTabbedPane.getComponent(abaNum);
             	c.getRootPane().setDefaultButton(c.getBotao());
+            	
+            	
+            	if(aba.equals("Disciplina")) {
+            		CadastrarDisciplina cadastrarDisciplina = (CadastrarDisciplina) c;
+            		
+            		CheckBoxList cb = cadastrarDisciplina.getCheckBoxList();
+            		listaController.listaDisciplinasCheckBoxList(cb, cadastrarDisciplina);
+            		
+            		cadastrarDisciplina.limpaCampos();
+            	}
             	
             	if(aba.equals("Turma")) {
             		CadastrarTurma cadastrarTurma = (CadastrarTurma) c;

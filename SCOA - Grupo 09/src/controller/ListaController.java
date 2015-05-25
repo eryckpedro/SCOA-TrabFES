@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
@@ -17,7 +19,10 @@ import model.Model;
 import model.ProfessoresModel;
 import model.SalasModel;
 import model.TurmasModel;
+import view.CadastrarDisciplina;
 import view.CadastrarTurma;
+import view.CheckBoxList;
+import view.InscricaoTurma;
 import view.Listar;
 import view.View;
 import dados.Aluno;
@@ -70,6 +75,17 @@ public class ListaController {
     	else if(aba.equals("Disciplina")) listaDisciplinas(l);
     	else if(aba.equals("Sala"))       listaSalas(l);
     	else if(aba.equals("Turma"))      listaTurmas(l);
+	}
+	
+	public void autualizaListaConsultasAluno(JTabbedPane consultasTabbedPane, int idAlunoLogado) {
+    	int abaNum = consultasTabbedPane.getSelectedIndex();
+    	String aba = consultasTabbedPane.getTitleAt(abaNum);
+    	
+    	Listar l = (Listar) consultasTabbedPane.getComponent(abaNum);
+    	
+    	// Aluno
+    	if(aba.equals("Turmas inscritas"))            listaTurmasInscritas(l, idAlunoLogado);
+    	else if(aba.equals("Disciplinas concluídas")) listaDiscConcluidas(l, idAlunoLogado);
 	}
 	
 	
@@ -153,7 +169,89 @@ public class ListaController {
 			
     }
 	
+	
+	public void listaTurmasInscritas(Listar l, int idAluno){
+		
+		ArrayList<Turma> lista = turmasModel.listaTurmasInscritas(idAluno);
+		DefaultTableModel tableModel = (DefaultTableModel) l.getTabela().getModel();
+		
+		limpaTabela(tableModel);
+		
+		for(Turma a : lista) {
+			int idDisciplina = a.idDisciplina;
+			Date horario     = a.horario;
+			int idProfessor  = a.idProfessor;
+			int idSala       = a.idSala;
+			
+			String disciplina = model.getNomeById(idDisciplina, "Disciplina");
+			String hora = (new SimpleDateFormat("HH:mm")).format(horario);
+			String professor = model.getNomeById(idProfessor, "Professor");
+			String sala = model.getSalaById(idSala);
+			
+			tableModel.addRow(new Object[]{disciplina, hora, professor, sala});
+		}
+    }
+	
+	public void listaDiscConcluidas(Listar l, int idAluno){
+		
+		ArrayList<Disciplina> lista = disciplinasModel.listaDiscConcluidas(idAluno);
+		DefaultTableModel tableModel = (DefaultTableModel) l.getTabela().getModel();
+		
+		limpaTabela(tableModel);
+		
+		for(Disciplina a : lista) {
+			String nome = a.nome;
+			String media = Float.toString(a.media);
+			
+			tableModel.addRow(new Object[]{nome, media});
+		}
+    }
+	
+	public void listaTurmasTabela(Listar l){
+		
+		ArrayList<Turma> lista = turmasModel.lista();
+		DefaultTableModel tableModel = (DefaultTableModel) l.getTabela().getModel();
+		
+		limpaTabela(tableModel);
+		
+		InscricaoTurma c = (InscricaoTurma) l;
+		c.limpaIdTurma();
+		
+		for(Turma a : lista) {
+			int idDisciplina = a.idDisciplina;
+			Date horario     = a.horario;
+			int idProfessor  = a.idProfessor;
+			int idSala       = a.idSala;
+			
+			String disciplina = model.getNomeById(idDisciplina, "Disciplina");
+			String hora = (new SimpleDateFormat("HH:mm")).format(horario);
+			String professor = model.getNomeById(idProfessor, "Professor");
+			String sala = model.getSalaById(idSala);
+			
+			tableModel.addRow(new Object[]{disciplina, hora, professor, sala});
+			c.addIdTurma(a.id);
+		}
+			
+			
+    }
+	
+	
+	public void listaDisciplinasCheckBoxList(CheckBoxList cb, CadastrarDisciplina c){
+		
+		DefaultListModel listModel = new DefaultListModel();
+		cb.setModel(listModel);
+		
+		ArrayList<Disciplina> lista = disciplinasModel.lista();
+		
+		c.limpaIdDisciplina();
 
+		for(Disciplina a : lista) {
+			listModel.addElement(new JCheckBox(a.nome));
+			c.addIdDisciplina(a.id);
+		}
+    }
+	
+	
 	
 	public void listaDisciplinasComboBox(JComboBox cb, CadastrarTurma c){
 		

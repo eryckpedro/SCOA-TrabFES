@@ -239,6 +239,35 @@ public class Model {
     	return r;
     }
     
+    
+    public boolean existeInscricao(int idAluno, int idTurma) {
+    	
+    	boolean r = false;
+    	
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("SELECT * FROM Aluno_frequenta_Turma WHERE idAluno = ? AND idTurma = ?");
+    		
+    		pst.setInt(1, idAluno);
+    		pst.setInt(2, idTurma);
+    		
+    		ResultSet rs = pst.executeQuery();
+    		
+    		if(rs.next())
+    			r = true;
+    		
+    		rs.close();
+    		pst.close();
+    		con.close();
+        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+        
+    	return r;
+    }
+    
     public String getPrimaryKey(String nomeTabela) {
 		String nome = null;
 		
@@ -277,7 +306,7 @@ public class Model {
     		ResultSet rs = pst.executeQuery();
     		
 	        if(rs.next())
-	        	nome = rs.getString("Nome");
+	        	nome = rs.getString("nome");
 	        
     		rs.close();
     		pst.close();
@@ -353,6 +382,31 @@ public class Model {
     		
 	        if(rs.next())
 	        	id = rs.getInt("idFuncCad");
+	        
+    		rs.close();
+    		pst.close();
+    		con.close();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+        
+    	return id;
+	}
+	
+	public int getDisciplinaFromTurma(int turmaId) {
+		int id = -1;
+		
+    	try {
+    		Connection con = dataSource.getConnection();
+    		
+    		PreparedStatement pst = con.prepareStatement("SELECT * FROM Turma WHERE idTurma = ?");
+    		pst.setInt(1, turmaId);
+    		
+    		ResultSet rs = pst.executeQuery();
+    		
+	        if(rs.next())
+	        	id = rs.getInt("idDisciplina");
 	        
     		rs.close();
     		pst.close();
