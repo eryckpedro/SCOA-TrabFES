@@ -14,26 +14,21 @@ CHANGELOG
 
 Entrega 2:
 
-- Para Funcionário:
+Para Funcionário:
++ Cadastro de Pré-Requisito em Disciplinas
 
-+ Cadastro de Pré-Requisito em Disciplinas;
+Para Aluno:
++ Inscrição em Turmas (já verificando pré-requisito)
++ Acesso de turmas inscritas
++ Acesso de disciplinas concluídas
 
+Para Professor:
++ Lançamento de Frequência de Alunos num Turma
++ Lançamento de Média Final em Aluno numa Disciplina
 
-- Para Aluno:
+Login:
++ Adicionados restrições de tamanho dos campos de cadastro (limite mínimo e máximo de caracteres de nome, login e senha);
++ Adicionadas exceções para nomes incorretos (e.g. número no nome de aluno);
 
-+ Inscrição em Turmas (já verificando pré-requisito);
-+ Acesso de turmas inscritas;
-+ Acesso de disciplinas concluídas;
-
-
-- Para Professor:
-
-+ Lançamento de Frequência de Alunos;
-+ Lançamento de Média Final em Aluno numa Disciplina;
-
-
-- Sistema:
-
-+ Adicionados requisitos para login e senha (ter mais de 6 caracteres);
-
-+ Adicionadas exceções para Nomes incorretos (e.g. número no nome de aluno);
+Geral:
++ Correções de pequenos bugs	
