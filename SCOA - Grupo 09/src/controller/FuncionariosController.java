@@ -72,7 +72,7 @@ public class FuncionariosController {
 		FuncionarioCadastros abaCadastros = (FuncionarioCadastros) getAba(tabbedPane, "Cadastros");
     	JTabbedPane cadastrosTabbedPane = abaCadastros.getTabbedPane();
 		
-    	FuncionarioConsultas abaConsultas = (FuncionarioConsultas) getAba(tabbedPane, "Consultas");
+    	FuncionarioConsultas abaConsultas = (FuncionarioConsultas) getAba(tabbedPane, "Buscas");
     	JTabbedPane consultasTabbedPane = abaConsultas.getTabbedPane();
     	
     	
@@ -187,7 +187,7 @@ public class FuncionariosController {
             	}
             	
             	
-            	if(aba.equals("Consultas")) {
+            	if(aba.equals("Buscas")) {
             		// atualizar lista da aba selecionada
             		listaController.autualizaListaConsultas(consultasTabbedPane);
             	}

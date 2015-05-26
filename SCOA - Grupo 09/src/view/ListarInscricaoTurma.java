@@ -29,7 +29,7 @@ public class ListarInscricaoTurma extends Listar {
 		
 		setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		JLabel lblNewLabel = new JLabel("Você está escrito nas matérias seguintes. Dê um duplo clique para maiores informações.");
+		JLabel lblNewLabel = new JLabel("<html>Você está escrito nas matérias seguintes.<br>Dê um duplo clique para maiores informações <span style='color: #AA0000'>(não implementado)</span>.");
 		lblNewLabel.setBorder(new EmptyBorder(5, 5, 10, 10) );
 		add(lblNewLabel, BorderLayout.NORTH);
 		

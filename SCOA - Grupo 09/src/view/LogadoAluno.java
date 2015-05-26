@@ -69,7 +69,7 @@ public class LogadoAluno extends Logado {
     	
     	tabbedPane.addTab("Início", new AlunoInicio());
     	tabbedPane.addTab("Inscrições", new InscricaoTurma());    
-    	tabbedPane.addTab("Consultas", new AlunoConsultas());    	
+    	tabbedPane.addTab("Buscas", new AlunoConsultas());    	
     	
     	add(tabbedPane);
 

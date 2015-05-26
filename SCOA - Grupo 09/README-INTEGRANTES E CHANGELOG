@@ -1,0 +1,39 @@
+Universidade Federal do Rio de Janeiro
+SCOA - Sistema de Controle Acadêmico
+Disciplina: Fundamentos de Engenharia de Software
+Grupo: 09
+Alunos:
+	Eduardo Costa
+	Eryck Pedro
+	Paloma Guenes
+	Patrícia Ghiraldelli
+
+================================================
+CHANGELOG
+================================================
+
+Entrega 2:
+
+- Para Funcionário:
+
++ Cadastro de Pré-Requisito em Disciplinas;
+
+
+- Para Aluno:
+
++ Inscrição em Turmas (já verificando pré-requisito);
++ Acesso de turmas inscritas;
++ Acesso de disciplinas concluídas;
+
+
+- Para Professor:
+
++ Lançamento de Frequência de Alunos;
++ Lançamento de Média Final em Aluno numa Disciplina;
+
+
+- Sistema:
+
++ Adicionados requisitos para login e senha (ter mais de 6 caracteres);
+
++ Adicionadas exceções para Nomes incorretos (e.g. número no nome de aluno);

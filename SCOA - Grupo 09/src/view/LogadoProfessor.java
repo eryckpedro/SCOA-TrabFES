@@ -70,7 +70,7 @@ public class LogadoProfessor extends Logado {
     	tabbedPane.addTab("Início", new ProfessorInicio());
     	tabbedPane.addTab("Cadastros", new ProfessorCadastros());
     	tabbedPane.addTab("Lançamentos", new ProfessorLancamentos());
-    	tabbedPane.addTab("Consultas", new ProfessorConsultas());
+    	tabbedPane.addTab("Buscas", new ProfessorConsultas());
     	
     	add(tabbedPane);
 

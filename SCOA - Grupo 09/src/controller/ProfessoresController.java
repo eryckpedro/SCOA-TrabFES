@@ -58,7 +58,7 @@ public class ProfessoresController {
     	ProfessorCadastros abaCadastros = (ProfessorCadastros) getAba(tabbedPane, "Cadastros");
     	JTabbedPane cadastrosTabbedPane = abaCadastros.getTabbedPane();
     	
-		ProfessorConsultas abaConsultas = (ProfessorConsultas) getAba(tabbedPane, "Consultas");
+		ProfessorConsultas abaConsultas = (ProfessorConsultas) getAba(tabbedPane, "Buscas");
     	JTabbedPane consultasTabbedPane = abaConsultas.getTabbedPane();
     	
     	ProfessorLancamentos abaLancamentos = (ProfessorLancamentos) getAba(tabbedPane, "Lançamentos");
@@ -154,7 +154,7 @@ public class ProfessoresController {
             }
         });
     	
-    	// ao mudar a aba dentro de "Consultas"
+    	// ao mudar a aba dentro de "Buscas"
     	consultasTabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
             	listaController.autualizaListaConsultas(consultasTabbedPane);
@@ -192,7 +192,7 @@ public class ProfessoresController {
             	}
             	
             	
-            	if(aba.equals("Consultas")) {
+            	if(aba.equals("Buscas")) {
             		// atualizar lista da aba selecionada
             		listaController.autualizaListaConsultas(consultasTabbedPane);
             	}

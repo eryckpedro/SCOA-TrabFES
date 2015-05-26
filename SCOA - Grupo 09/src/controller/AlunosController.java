@@ -49,7 +49,7 @@ public class AlunosController {
 
 	public void init() {
 		
-		AlunoConsultas abaConsultas = (AlunoConsultas) getAba(tabbedPane, "Consultas");
+		AlunoConsultas abaConsultas = (AlunoConsultas) getAba(tabbedPane, "Buscas");
     	JTabbedPane consultasTabbedPane = abaConsultas.getTabbedPane();
     	
     	InscricaoTurma abaInscricoes = (InscricaoTurma) getAba(tabbedPane, "Inscrições");
@@ -79,7 +79,7 @@ public class AlunosController {
             		listaController.listaTurmasTabela((Listar) abaInscricoes);
             		abaInscricoes.getRootPane().setDefaultButton(abaInscricoes.getBotao());
             	}
-            	else if(aba.equals("Consultas")) {
+            	else if(aba.equals("Buscas")) {
             		tabbedPane.getRootPane().setDefaultButton(null);
             		
             		// atualizar lista da aba selecionada

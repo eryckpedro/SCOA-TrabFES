@@ -74,7 +74,7 @@ public class LogadoFuncionario extends Logado {
     	
     	tabbedPane.addTab("Início", new FuncionarioInicio());
     	tabbedPane.addTab("Cadastros", new FuncionarioCadastros());
-    	tabbedPane.addTab("Consultas", new FuncionarioConsultas());    	
+    	tabbedPane.addTab("Buscas", new FuncionarioConsultas());    	
     	
     	add(tabbedPane);
 

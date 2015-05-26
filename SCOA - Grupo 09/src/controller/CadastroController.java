@@ -482,7 +482,7 @@ public class CadastroController {
 		
 		// verifica se concluiu todos os pré-requisitos
 		for(Integer prereq : preRequisitos) {
-			if(!alunosModel.concluiuDisciplina(idAlunoLogado, idDisciplina)) {
+			if(!alunosModel.concluiuDisciplina(idAlunoLogado, prereq)) {
 				errado = true;
 				erros += "\nVocê ainda não concluiu \"" + model.getNomeById(prereq, "Disciplina") + "\".";
 			}
