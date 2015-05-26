@@ -95,7 +95,7 @@ public class LoginController {
 				mudaPagina(new LogadoProfessor(), login, "Professor");
 				
 				// cria e inicia o controller dos professores
-				ProfessoresController f = new ProfessoresController(model, view);
+				ProfessoresController f = new ProfessoresController(model, view, id);
 				f.init();
 			}
 		}
@@ -177,10 +177,17 @@ public class LoginController {
 	
 	// TODO remover
 	public void testeRapidoAluno() {
-		
 		Login l = (Login) view.getPanel();
 		l.testeRapidoAluno();
 		login();
+	}
+
+	// TODO remover
+	public void testeRapidoProfessor() {
+		Login l = (Login) view.getPanel();
+		l.testeRapidoProfessor();
+		login();
+		
 	}
 	
 	

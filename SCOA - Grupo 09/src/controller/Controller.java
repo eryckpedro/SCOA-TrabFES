@@ -18,11 +18,9 @@ public class Controller {
         LoginController loginController = new LoginController(model, view);
         loginController.init();
         
-        // logar automaticamente no admin, para testes mais rápidos
-        //loginController.testeRapido();
-        
-        // logar automaticamente no aluno
-        loginController.testeRapidoAluno();
+        //loginController.testeRapido();          // logar automaticamente no admin, para testes mais rápidos
+        //loginController.testeRapidoAluno();     // logar automaticamente no aluno
+        //loginController.testeRapidoProfessor(); // logar automaticamente no professor
     }
     
     

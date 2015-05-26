@@ -19,10 +19,13 @@ import model.Model;
 import model.ProfessoresModel;
 import model.SalasModel;
 import model.TurmasModel;
+import view.Cadastrar;
 import view.CadastrarDisciplina;
+import view.CadastrarPauta;
 import view.CadastrarTurma;
 import view.CheckBoxList;
 import view.InscricaoTurma;
+import view.LancarFrequencia;
 import view.Listar;
 import view.View;
 import dados.Aluno;
@@ -242,7 +245,6 @@ public class ListaController {
 		cb.setModel(listModel);
 		
 		ArrayList<Disciplina> lista = disciplinasModel.lista();
-		
 		c.limpaIdDisciplina();
 
 		for(Disciplina a : lista) {
@@ -251,6 +253,59 @@ public class ListaController {
 		}
     }
 	
+	
+	public void listaTurmasProfComboBox(JComboBox cb, Cadastrar c, int idProfLogado){
+		
+		DefaultComboBoxModel cbModel = new DefaultComboBoxModel();
+		cb.setModel(cbModel);
+		
+		ArrayList<Turma> lista = turmasModel.getTurmasByProfessor(idProfLogado);
+		
+		if(lista.size() == 0) {
+			c.comErro("<html>Não há turmas atribuídas você no momento.<br>Você só pode efetuar cadastros e lançamentos em turmas associadas a você.");
+		}
+		else
+			c.semErro();
+		
+		c.limpaIdTurma();
+
+		for(Turma t : lista) {
+			Disciplina d = disciplinasModel.getDisciplina(t.idDisciplina);
+			
+			String nome = d.nome;
+			String hora = (new SimpleDateFormat("HH:mm")).format(t.horario);
+			
+			cbModel.addElement(nome + " às " + hora);
+			c.addIdTurma(t.id);
+		}
+    }
+	
+	
+
+	public void listaAlunosLancamentos(JComboBox cb1, JComboBox cb2, Cadastrar c, int idProfLogado) {
+		int turmaSelecionada = cb1.getSelectedIndex();
+		
+		if(turmaSelecionada == -1)
+			return;
+		
+		int turmaId = c.getIdTurma(turmaSelecionada);
+		
+		DefaultComboBoxModel cbModel = new DefaultComboBoxModel();
+		cb2.setModel(cbModel);
+		
+		ArrayList<Aluno> lista = turmasModel.getAlunosByTurma(turmaId);
+		
+		if(lista.size() == 0)
+			alert("A turma selecionada não possui alunos cadastrados! Por favor, seleciona outra turma.");
+		
+		c.limpaIdAluno();
+
+		for(Aluno a : lista) {
+			cbModel.addElement(a.nome);
+			c.addIdAluno(a.id);
+		}
+		
+	}
 	
 	
 	public void listaDisciplinasComboBox(JComboBox cb, CadastrarTurma c){
@@ -301,5 +356,7 @@ public class ListaController {
 	public void alert(String mensagem) {
 		JOptionPane.showMessageDialog(null, mensagem);
 	}
+
+
 
 }

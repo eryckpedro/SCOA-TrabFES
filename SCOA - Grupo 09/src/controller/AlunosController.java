@@ -16,6 +16,7 @@ import view.AlunoConsultas;
 import view.AlunoInscricoes;
 import view.Cadastrar;
 import view.CadastrarFuncionario;
+import view.FuncionarioCadastros;
 import view.FuncionarioConsultas;
 import view.InscricaoTurma;
 import view.Listar;
@@ -51,6 +52,16 @@ public class AlunosController {
 		AlunoConsultas abaConsultas = (AlunoConsultas) getAba(tabbedPane, "Consultas");
     	JTabbedPane consultasTabbedPane = abaConsultas.getTabbedPane();
     	
+    	InscricaoTurma abaInscricoes = (InscricaoTurma) getAba(tabbedPane, "Inscrições");
+    	
+    	
+		abaInscricoes.getBotao().addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent actionEvent) {
+            	cadastroController.adicionaInscricaoEmTurma(abaInscricoes, idAlunoLogado);
+            }
+    	});
+		
+		
     	
     	consultasTabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -65,16 +76,12 @@ public class AlunosController {
             	String aba = tabbedPane.getTitleAt(abaNum);
             	
             	if(aba.equals("Inscrições")) {
-            		Listar abaInscricoes = (Listar) tabbedPane.getComponent(abaNum);
-            		listaController.listaTurmasTabela(abaInscricoes);
-            		
-            		((InscricaoTurma) abaInscricoes).getBotao().addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent actionEvent) {
-                        	cadastroController.adicionaInscricaoEmTurma((InscricaoTurma) abaInscricoes, idAlunoLogado);
-                        }
-                	});
+            		listaController.listaTurmasTabela((Listar) abaInscricoes);
+            		abaInscricoes.getRootPane().setDefaultButton(abaInscricoes.getBotao());
             	}
             	else if(aba.equals("Consultas")) {
+            		tabbedPane.getRootPane().setDefaultButton(null);
+            		
             		// atualizar lista da aba selecionada
             		listaController.autualizaListaConsultasAluno(consultasTabbedPane, idAlunoLogado);
             	}

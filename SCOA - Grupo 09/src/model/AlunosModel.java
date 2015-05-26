@@ -124,5 +124,42 @@ public class AlunosModel {
     	return r;
     }
     
+    public void adicionaFrequencia(int turmaId, int alunoId, float frequencia) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("UPDATE Aluno_frequenta_Turma SET frequencia = ? WHERE idTurma = ? AND idAluno = ?");
+            
+    		pst.setFloat(1, frequencia);
+    		pst.setInt(2, turmaId);
+    		pst.setInt(3, alunoId);
+    		
+            pst.execute();
+            
+	        pst.close();
+	        con.close();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+
+	public void adicionaMedia(int disciplinaId, int alunoId, float med) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("INSERT INTO Aluno_conclui_Disciplina(idAluno, idDisciplina, media) VALUES (?, ?, ?)");
+            
+            pst.setInt(1, alunoId);
+            pst.setInt(2, disciplinaId);
+            pst.setFloat(3, med);
+            pst.execute();
+	        
+	        pst.close();
+	        con.close();
+	        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+	}
     
 }

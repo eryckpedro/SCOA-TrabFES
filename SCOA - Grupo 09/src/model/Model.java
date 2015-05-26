@@ -380,8 +380,10 @@ public class Model {
     		
     		ResultSet rs = pst.executeQuery();
     		
+    		String primary_key = getPrimaryKey(nomeTabela);
+    		
 	        if(rs.next())
-	        	id = rs.getInt("idFuncCad");
+	        	id = rs.getInt(primary_key);
 	        
     		rs.close();
     		pst.close();

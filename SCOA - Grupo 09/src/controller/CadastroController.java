@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import model.AlunosModel;
@@ -17,10 +18,13 @@ import model.TurmasModel;
 import view.CadastrarAluno;
 import view.CadastrarDisciplina;
 import view.CadastrarFuncionario;
+import view.CadastrarPauta;
 import view.CadastrarProfessor;
 import view.CadastrarSala;
 import view.CadastrarTurma;
 import view.InscricaoTurma;
+import view.LancarFrequencia;
+import view.LancarMedia;
 import view.View;
 
 public class CadastroController {
@@ -462,6 +466,12 @@ public class CadastroController {
 
 	public void adicionaInscricaoEmTurma(InscricaoTurma c, int idAlunoLogado) {
 		int linhaSelecionada = c.getTabela().getSelectedRow();
+		
+		if(linhaSelecionada == -1) {
+			alert("Selecione uma turma para se inscrever!");
+			return;
+		}
+		
 		int idTurma = c.getIdTurma(linhaSelecionada);
 		
 		int idDisciplina = model.getDisciplinaFromTurma(idTurma);
@@ -491,5 +501,122 @@ public class CadastroController {
 		alunosModel.adicionaInscricaoEmTurma(idAlunoLogado, idTurma);
 		
 		alert("Parabéns! Você se inscreveu em \"" + model.getNomeById(idDisciplina, "Disciplina") + "\".");
+	}
+
+	public void adicionaPauta(Component aba) {
+		CadastrarPauta c = (CadastrarPauta) aba;
+		
+		int turmaSelecionada = c.getComboBox().getSelectedIndex();
+		
+		if(turmaSelecionada == -1) {
+			alert("Selecione uma turma!");
+			return;
+		}
+		
+		
+		int turmaId = c.getIdTurma(turmaSelecionada);
+		
+		String pauta = c.getPauta();
+		
+		if(pauta.length() <= 6) {
+			alert("A pauta de aula deve ter mais que 5 caracteres!");
+			return;
+		}
+		
+		if(pauta.length() > 100) {
+			alert("A pauta de aula não deve ter mais que 100 caracteres!");
+			return;
+		}
+		
+		turmasModel.adicionaPauta(turmaId, pauta);
+		
+		alert("A pauta de aula foi salva com sucesso.");
+		c.limpaCampos();
+		
+	}
+
+	public void adicionaFrequencia(Component aba) {
+		LancarFrequencia l = (LancarFrequencia) aba;
+		String frequencia = l.getFrequencia();
+
+		int turmaSelecionada = l.getComboBoxTurmas().getSelectedIndex();
+		int alunoSelecionado = l.getComboBoxAlunos().getSelectedIndex();
+		
+		if(turmaSelecionada == -1) {
+			alert("Selecione uma turma!");
+			return;
+		}
+		
+		if(alunoSelecionado == -1) {
+			alert("Selecione um aluno!");
+			return;
+		}
+		
+		if(frequencia.isEmpty()) {
+			alert("Por favor, informe a frequência!");
+			return;
+		}
+	
+    	if(!frequencia.matches("[0-9\\.]+")) {
+    		alert("A frequência só pode conter números e ponto.");
+    		return;
+    	}
+    	
+    	float freq = Float.parseFloat(frequencia);
+    	if(!(freq >= 0 && freq <= 100)) {
+    		alert("A frequência deve ser um número entre 0 e 100, representando a porcentagem.");
+    		return;
+    	}
+
+    	
+		int turmaId = l.getIdTurma(turmaSelecionada);
+		int alunoId = l.getIdAluno(alunoSelecionado);
+		
+		alunosModel.adicionaFrequencia(turmaId, alunoId, freq);
+		alert("Frequencia lançada!");
+		l.limpaCampos();
+	}
+
+	public void adicionaMedia(Component aba) {
+		LancarMedia l = (LancarMedia) aba;
+		String media = l.getMedia();
+
+		int turmaSelecionada = l.getComboBoxTurmas().getSelectedIndex();
+		int alunoSelecionado = l.getComboBoxAlunos().getSelectedIndex();
+		
+		if(turmaSelecionada == -1) {
+			alert("Selecione uma turma!");
+			return;
+		}
+		
+		if(alunoSelecionado == -1) {
+			alert("Selecione um aluno!");
+			return;
+		}
+		
+		if(media.isEmpty()) {
+			alert("Por favor, informe a média!");
+			return;
+		}
+	
+    	if(!media.matches("[0-9\\.]+")) {
+    		alert("A média só pode conter números e ponto.");
+    		return;
+    	}
+    	
+    	float med = Float.parseFloat(media);
+    	if(!(med >= 0 && med <= 100)) {
+    		alert("A média deve ser um número entre 0 e 10.");
+    		return;
+    	}
+
+    	
+		int turmaId = l.getIdTurma(turmaSelecionada);
+		int alunoId = l.getIdAluno(alunoSelecionado);
+		int disciplinaId = model.getDisciplinaFromTurma(turmaId);
+		
+		alunosModel.adicionaMedia(disciplinaId, alunoId, med);
+		alert("Média lançada!");
+		l.limpaCampos();		
 	}
 }

@@ -10,6 +10,7 @@ import java.util.Date;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 
+import dados.Aluno;
 import dados.Turma;
 
 public class TurmasModel {
@@ -120,6 +121,44 @@ public class TurmasModel {
     	return null;
     }
     
+    
+    public ArrayList<Turma> getTurmasByProfessor(int idProfessor) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("SELECT * FROM Turma WHERE idProfessor = ?");
+    		pst.setInt(1, idProfessor);
+    		
+    		ResultSet rs = pst.executeQuery();
+	        
+    		
+    		ArrayList<Turma> lista = new ArrayList<>();
+	        
+	        while (rs.next()) {
+	        	Turma a = new Turma();
+	        	
+	        	a.id           = rs.getInt("idTurma");
+	        	a.idDisciplina = rs.getInt("idDisciplina");
+	        	a.horario      = rs.getTimestamp("horario");
+	        	a.idProfessor  = rs.getInt("idProfessor");
+	        	a.idSala       = rs.getInt("idSala");
+	        	
+	        	lista.add(a);
+            }
+	        
+	        rs.close();
+	        pst.close();
+	        con.close();
+	        
+	        return lista;
+        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+        
+    	return null;
+    }
+    
     public void adiciona(int idDisciplina, Date data, int idProfessor, int idSala, int idFuncCad) {
     	try {
     		Connection con = dataSource.getConnection();
@@ -142,5 +181,91 @@ public class TurmasModel {
     		e.printStackTrace();
     	}
     }
+    
+    public void adicionaPauta(int id, String pauta) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("UPDATE Turma SET pauta_aula = ? WHERE idTurma = ?");
+            
+    		pst.setString(1, pauta);
+    		pst.setInt(2, id);
+    		
+            pst.execute();
+            
+	        pst.close();
+	        con.close();
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+    }
+
+	public ArrayList<Aluno> getAlunosByTurma(int idTurma) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("SELECT * FROM Aluno_frequenta_Turma WHERE idTurma = ?");
+    		pst.setInt(1, idTurma);
+    		
+    		ResultSet rs = pst.executeQuery();
+	        
+    		
+    		ArrayList<Aluno> lista = new ArrayList<>();
+	        
+	        while (rs.next()) {
+	        	int idAluno = rs.getInt("idAluno");
+	        	Aluno a = getAluno(idAluno);
+	        	
+	        	lista.add(a);
+            }
+	        
+	        rs.close();
+	        pst.close();
+	        con.close();
+	        
+	        return lista;
+        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+        
+    	return null;
+    }
+	
+    public Aluno getAluno(int idAluno) {
+    	try {
+    		Connection con = dataSource.getConnection();
+    		PreparedStatement pst = con.prepareStatement("SELECT * FROM Aluno WHERE idAluno = ?");
+    		pst.setInt(1, idAluno);
+    		
+    		ResultSet rs = pst.executeQuery();
+	        
+        	Aluno a = new Aluno();
+        	
+	        while (rs.next()) {
+	        	a = new Aluno();
+	        	
+	        	a.id        = rs.getInt("idAluno");
+	        	a.nome      = rs.getString("Nome");
+	        	a.matricula = rs.getString("Matricula");
+	        	a.cr        = rs.getFloat("CR");
+	        	a.idFuncCad = rs.getInt("idFuncCad");
+	        }
+	        
+	        
+	        rs.close();
+	        pst.close();
+	        con.close();
+	        
+	        return a;
+        
+    	}
+    	catch(Exception e) {
+    		e.printStackTrace();
+    	}
+        
+    	return null;
+    }
+    
     
 }

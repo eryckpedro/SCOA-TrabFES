@@ -130,4 +130,11 @@ public class Login extends JPanel {
 		txtSenha.setText("aluno1");
 		rdbtnAluno.setSelected(true);
 	}
+
+	// TODO remover
+	public void testeRapidoProfessor() {
+		txtLogin.setText("professor");
+		txtSenha.setText("professor");
+		rdbtnProfessor.setSelected(true);		
+	}
 }
